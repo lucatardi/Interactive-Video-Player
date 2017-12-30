@@ -44,7 +44,7 @@ function changeClass (tempoVideo) {
 }
 
 // ************************** Adapt the size of the video to the wrapper's size.
-$("video, audio").mediaelementplayer({
+$("#mediaplayer").mediaelementplayer({
   defaultVideoWidth: "100%",
   defaultVideoHeight: "100%"
 });

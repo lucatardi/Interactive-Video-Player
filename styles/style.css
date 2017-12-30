@@ -11,6 +11,10 @@ p {
   line-height: 2;
 }
 
+.highlight {
+  color: red;
+}
+
 @media (min-width: 600px) {
   .wrapper {
     width: 70%;

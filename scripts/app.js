@@ -1,57 +1,56 @@
+//******************************************************************************
+//*********************** "HIGHLIGHT TEXT" APPLICATION *************************
+//********************************************************* Author Luca Tardito.
+
+// ****************************************************************** Variables.
+const video = document.getElementsByTagName("VIDEO")[0];
+const spamList = document.getElementsByTagName("SPAM");
+const spamPresent = document.getElementsByClassName("highlight")[0];
+
+//********************************************************** Time table's array.
+const timesTable = [    // [ start , finish ],
+  [  0.240 ,  4.130 ],
+  [  4.130 ,  7.535 ],
+  [  7.535 , 11.270 ],
+  [ 11.270 , 13.960 ],
+  [ 13.960 , 17.940 ],
+  [ 17.940 , 22.370 ],
+  [ 22.370 , 26.880 ],
+  [ 26.880 , 30.920 ],
+  [ 32.100 , 34.730 ],
+  [ 34.730 , 39.430 ],
+  [ 39.430 , 41.190 ],
+  [ 42.350 , 46.300 ],
+  [ 46.300 , 49.270 ],
+  [ 49.270 , 53.760 ],
+  [ 53.760 , 57.780 ],
+  [ 57.780 , 59.860 ]
+];
+
+// *********************************** Function to assign the class "highlight".
+function changeClass (tempoVideo) {
+  for(let i=0; i < spamList.length; i++) {
+
+    if (tempoVideo > timesTable[i][0] && tempoVideo < timesTable[i][1]) {
+      spamList[i].classList.add("highlight");
+    } else {
+      spamList[i].classList.remove("highlight");
+    }
+// ************************** Event Listener to move the video cliking the text.
+    spamList[i].addEventListener("click", () => {  // inside  this function to
+      video.currentTime = timesTable[i][0];        // do only one loop.
+     });
+  }
+}
+
+// ************************** Adapt the size of the video to the wrapper's size.
 $("video, audio").mediaelementplayer({
   defaultVideoWidth: "100%",
   defaultVideoHeight: "100%"
 });
 
-const video = document.getElementsByTagName("VIDEO")[0];
-const spamList = document.getElementsByTagName("SPAM");
-
-const startTimes = [
-  "00:00:00,240",
-  "00:00:04,130",
-  "00:00:07,535",
-  "00:00:11,270",
-  "00:00:13,960",
-  "00:00:17,940",
-  "00:00:22,370",
-  "00:00:26,880",
-  "00:00:32,100",
-  "00:00:34,730",
-  "00:00:39,430",
-  "00:00:42,350",
-  "00:00:46,300",
-  "00:00:49,270",
-  "00:00:53,760",
-  "00:00:57,780"   ];
-
-const finishTimes = [
-  "00:00:04,130",
-  "00:00:07,535",
-  "00:00:11,270",
-  "00:00:13,960",
-  "00:00:17,940",
-  "00:00:22,370",
-  "00:00:26,880",
-  "00:00:30,920",
-  "00:00:34,730",
-  "00:00:39,430",
-  "00:00:41,190",
-  "00:00:46,300",
-  "00:00:49,270",
-  "00:00:53,760",
-  "00:00:57,780",
-  "00:01:00,150"   ];
-
-function () {
-  video.addEventListener
-}
-
-function changeClass (tempoVideo) {
-  for(let i=0, i < spamList.length; i++) {
-    if (tempoVideo >= startTimes(i)__ && tempoVideo <= finishTimes(i) {
-      spamList[i].classList.add("highlight");
-    } else {
-      spamList[i].classList.remove("highlight");
-    }
-  }
-}
+//************************************** Event Listener to keep update the time.
+video.addEventListener("timeupdate", () => {
+  let currentTime = video.currentTime;
+  changeClass(currentTime);
+});

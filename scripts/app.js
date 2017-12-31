@@ -2,6 +2,12 @@
 //*********************** "HIGHLIGHT TEXT" APPLICATION *************************
 //********************************************************* Author Luca Tardito.
 
+// ************************** Adapt the size of the video to the wrapper's size.
+$("#mediaplayer").mediaelementplayer({
+  defaultVideoWidth: "100%",
+  defaultVideoHeight: "100%"
+});
+
 // ****************************************************************** Variables.
 const video = document.getElementsByTagName("VIDEO")[0];
 const spamList = document.getElementsByTagName("SPAM");
@@ -31,23 +37,18 @@ const timesTable = [    // [ start , finish ],
 function changeClass (tempoVideo) {
   for(let i=0; i < spamList.length; i++) {
 
-    if (tempoVideo > timesTable[i][0] && tempoVideo < timesTable[i][1]) {
+    if (tempoVideo >= timesTable[i][0] && tempoVideo < timesTable[i][1]) {
       spamList[i].classList.add("highlight");
     } else {
       spamList[i].classList.remove("highlight");
     }
+
 // ************************** Event Listener to move the video cliking the text.
     spamList[i].addEventListener("click", () => {  // inside  this function to
       video.currentTime = timesTable[i][0];        // do only one loop.
      });
   }
 }
-
-// ************************** Adapt the size of the video to the wrapper's size.
-$("#mediaplayer").mediaelementplayer({
-  defaultVideoWidth: "100%",
-  defaultVideoHeight: "100%"
-});
 
 //************************************** Event Listener to keep update the time.
 video.addEventListener("timeupdate", () => {
